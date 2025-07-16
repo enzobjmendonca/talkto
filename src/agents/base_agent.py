@@ -5,7 +5,7 @@ import os
 dotenv.load_dotenv()
 
 class BaseAgent(ABC):
-    def __init__(self, name: str, prompt: str, model: str = "gemini-2.5-flash", temperature: float = 0.5, max_tokens: int = 1000):
+    def __init__(self, name: str, prompt: str, model: str = "gemini-2.5-flash", temperature: float = 0.5, max_tokens: int = 10000):
         self.name = name
         self.prompt = prompt
         self.model = model

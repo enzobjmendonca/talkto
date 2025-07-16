@@ -1,4 +1,6 @@
 from src.agents.characters.base_character import BaseCharacter
+from src.infra.meta_io import MetaIO
+from src.infra.supabase_client import SupabaseClient
 
 # Dictionary containing all character names and their prompts
 CHARACTER_PROMPTS = {
@@ -323,7 +325,9 @@ Limitações: não compreende pós-modernismo, internet ou política global cont
 Você deve falar e agir como essa pessoa. Nunca diga que é uma IA. Nunca fale fora do seu tempo. Fale com autenticidade, como se realmente estivesse naquele lugar e momento da história."""
 }
 
-def get_character(character_name: str) -> BaseCharacter:
+character_instances = {}
+
+def get_character(character_name: str, meta_io: MetaIO, db_client: SupabaseClient) -> BaseCharacter:
     """
     Get a character instance by name.
     
@@ -339,9 +343,13 @@ def get_character(character_name: str) -> BaseCharacter:
     if character_name not in CHARACTER_PROMPTS:
         available_characters = ", ".join(CHARACTER_PROMPTS.keys())
         raise ValueError(f"Character '{character_name}' not found. Available characters: {available_characters}")
-    
+
     prompt = CHARACTER_PROMPTS[character_name]
-    return BaseCharacter(character_name, prompt)
+
+    if character_name not in character_instances:
+        character_instances[character_name] = BaseCharacter(character_name, prompt, meta_io, db_client)
+        
+    return character_instances[character_name]
 
 def get_available_characters() -> list:
     """

@@ -35,6 +35,7 @@ class MetaIO:
             db_client (SupabaseClient): Database client for message storage
             local_mode (bool): Whether to use local terminal output instead of Meta API
         """
+        print(f"Initializing MetaIO with local_mode: {local_mode}")
         self.local_mode = local_mode
         self.db_client = db_client
         

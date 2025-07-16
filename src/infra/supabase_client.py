@@ -218,7 +218,7 @@ class SupabaseClient:
         """
         new_user = User(
             id=0,  # Will be set by database
-            is_active=False,
+            is_active=True,  # Corrigido para True
             created_at=datetime.now(),
             updated_at=datetime.now(),
             phone_number=phone_number,

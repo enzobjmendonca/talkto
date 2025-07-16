@@ -56,7 +56,7 @@ cp .env.example .env
 
 6. Run the application:
 ```bash
-python main.py
+python local_test.py
 ```
 
 ## 📁 Project Structure
